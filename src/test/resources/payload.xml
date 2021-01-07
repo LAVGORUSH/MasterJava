@@ -2,22 +2,50 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://javaops.ru payload.xsd">
     <Users>
-        <User flag="active" city="kiv">
-            <email>gmail@gmail.com</email>
-            <fullName>Full Name</fullName>
-        </User>
-        <User flag="superuser" city="spb">
-            <email>admin@javaops.ru</email>
-            <fullName>Admin</fullName>
-        </User>
-        <User flag="deleted" city="spb">
-            <email>mail@yandex.ru</email>
-            <fullName>Deleted</fullName>
-        </User>
+        <User fullName="Full Name" email="gmail@gmail.com" flag="active" city="kiv" groups="masterjava01 topjava20"/>
+        <User fullName="Admin" email="admin@javaops.ru" flag="superuser" city="spb" groups="masterjava02 topjava21"/>
+        <User fullName="Deleted" email="mail@yandex.ru" flag="deleted" city="spb" groups="topjava20"/>
     </Users>
     <Cities>
         <City id="spb">Санкт-Петербург</City>
         <City id="kiv">Киев</City>
         <City id="mnsk">Минск</City>
     </Cities>
+    <Projects>
+        <Project id="topjava">
+            <name>TopJava</name>
+            <description>Java Enterprise Online Project
+                Разработка полнофункционального Spring/JPA Enterprise приложения
+                c авторизацией и правами доступа на основе ролей с использованием
+                наиболее популярных инструментов и технологий Java:
+                Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson),
+                Bootstrap (css,js), datatables, jQuery + plugins,
+                Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
+            </description>
+            <Groups>
+                <Group id="topjava20" status="CURRENT"/>
+                <Group id="topjava21" status="REGISTERING"/>
+            </Groups>
+        </Project>
+        <Project id="masterjava">
+            <name>MasterJava</name>
+            <description>Многомодульный maven. Многопоточность. XML. Веб сервисы. Удаленное взаимодействие
+                приложение импорта из XML (JAXB, StAX, XPath, XSLT)
+                многопоточного почтового веб-сервиса (JavaMail, java.util.concurrent, JAX-WS, MTOM, хендлеры авторизации, логирования и статистики)
+                веб приложения отправки почты с вложениями
+                по SOAP (JAX-WS, MTOM)
+                по JAX-RS (Jersey)
+                по JMS (ActiveMQ)
+                через AKKA
+                используя асинхронные сервлеты 3.0
+                сохранение данных в PostgreSQL используя jDBI
+                миграция базы LiquiBase
+                использование в проекте Guava, Thymleaf, Lombook, StreamEx, Typesafe Config, Java Microbenchmark JMH
+            </description>
+            <Groups>
+                <Group id="masterjava01" status="FINISHED"/>
+                <Group id="masterjava02" status="CURRENT"/>
+            </Groups>
+        </Project>
+    </Projects>
 </Payload>

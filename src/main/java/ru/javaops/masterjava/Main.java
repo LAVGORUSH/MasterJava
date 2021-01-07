@@ -1,5 +1,7 @@
 package ru.javaops.masterjava;
 
+import java.util.Objects;
+
 /**
  * User: gkislin
  * Date: 05.08.2015
@@ -12,3 +14,4 @@ public class Main {
         System.out.format("Hello MasterJava!");
     }
 }
+
