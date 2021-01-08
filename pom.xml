@@ -105,6 +105,11 @@
             <version>1.18.16</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.j2html</groupId>
+            <artifactId>j2html</artifactId>
+            <version>1.4.0</version>
+        </dependency>
     </dependencies>
 
     <profiles>
