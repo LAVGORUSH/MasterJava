@@ -20,10 +20,14 @@ public class JaxbParser {
     protected JaxbMarshaller jaxbMarshaller;
     protected JaxbUnmarshaller jaxbUnmarshaller;
     protected Schema schema;
+    private final ThreadLocal<JaxbMarshaller> marshallerThreadLocal = new ThreadLocal<>();
+    private final ThreadLocal<JaxbUnmarshaller> unmarshallerThreadLocal = new ThreadLocal<>();
+    private final JAXBContext ctx;
 
     public JaxbParser(Class... classesToBeBound) {
         try {
-            init(JAXBContext.newInstance(classesToBeBound));
+            ctx = JAXBContext.newInstance(classesToBeBound);
+            init(ctx);
         } catch (JAXBException e) {
             throw new IllegalArgumentException(e);
         }
@@ -32,15 +36,16 @@ public class JaxbParser {
     //    http://stackoverflow.com/questions/30643802/what-is-jaxbcontext-newinstancestring-contextpath
     public JaxbParser(String context) {
         try {
-            init(JAXBContext.newInstance(context));
+            ctx = JAXBContext.newInstance(context);
+            init(ctx);
         } catch (JAXBException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
     private void init(JAXBContext ctx) throws JAXBException {
-        jaxbMarshaller = new JaxbMarshaller(ctx);
-        jaxbUnmarshaller = new JaxbUnmarshaller(ctx);
+        jaxbMarshaller = getJaxbMarshaller(ctx);
+        jaxbUnmarshaller = getJaxbUnmarshaller(ctx);
     }
 
     // Unmarshaller
@@ -89,5 +94,23 @@ public class JaxbParser {
 
     public void validate(Reader reader) throws IOException, SAXException {
         schema.newValidator().validate(new StreamSource(reader));
+    }
+
+    public JaxbMarshaller getJaxbMarshaller(JAXBContext ctx) throws JAXBException {
+        JaxbMarshaller jaxbMarshaller = marshallerThreadLocal.get();
+        if (jaxbMarshaller == null) {
+            jaxbMarshaller = new JaxbMarshaller(ctx);
+            marshallerThreadLocal.set(jaxbMarshaller);
+        }
+        return jaxbMarshaller;
+    }
+
+    public JaxbUnmarshaller getJaxbUnmarshaller(JAXBContext ctx) throws JAXBException {
+        JaxbUnmarshaller jaxbUnmarshaller = unmarshallerThreadLocal.get();
+        if (jaxbUnmarshaller == null) {
+            jaxbUnmarshaller = new JaxbUnmarshaller(ctx);
+            unmarshallerThreadLocal.set(jaxbUnmarshaller);
+        }
+        return jaxbUnmarshaller;
     }
 }

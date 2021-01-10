@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>File Upload</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<section class="my-5">
+    <div class="jumbotron pt-4">
+        <div class="container">
+            <h3 class="text-center">Users</h3>
+            <table class="table table-striped" id="datatable">
+                <thead>
+                <tr>
+                    <th>Full name</th>
+                    <th>Email</th>
+                    <th>Flag</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--/*@thymesVar id="user" type="ru.javaops.masterjava.xml.schema.User"*/-->
+                <!--/*@thymesVar id="users" type="java.util.List<ru.javaops.masterjava.xml.schema.User>"*/-->
+                <tr th:each="user : ${users}" id="users">
+                    <td th:text="${user.value}">Full name</td>
+                    <td th:text="${user.email}">Email</td>
+                    <td th:text="${user.flag}">Flag</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</body>
+</html>
